@@ -1,0 +1,172 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+		"name": "DB414 Assignment 2 - Robust Data Ingestion Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Get All Inventory",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/inventory",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"inventory"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2. Filter Inventory by Category",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/inventory?category=electronics",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"inventory"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "electronics"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3. Filter Inventory by Category & Min Price",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/inventory?category=furniture&minPrice=200",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"inventory"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "furniture"
+						},
+						{
+							"key": "minPrice",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4. POST Valid Inventory Item (201 Created)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"sku\": \"INV-105\",\n  \"name\": \"Webcam\",\n  \"category\": \"electronics\",\n  \"quantity\": 25,\n  \"price\": 49.99\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/inventory",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"inventory"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5. POST Error - Missing Required Fields (400)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"sku\": \"INV-106\",\n  \"name\": \"Incomplete Item\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/inventory",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"inventory"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6. POST Error - Malformed JSON Syntax (400)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"sku\": \"INV-107\",\n  \"name\": \"Bad JSON\" -- missing closing quotes or brackets\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/inventory",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"inventory"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
